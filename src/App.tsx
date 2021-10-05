@@ -1,23 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useContext } from 'react';
 import './App.css';
+import { Web3Context } from './web3';
 
-function App() {
+const App = () => {
+  const { connectToMetaMask, context } = useContext(Web3Context);
+  const { active } = context;
+  console.log("🚀 ~ file: App.tsx ~ line 7 ~ App ~ context", context)
+  console.log("🚀 ~ file:  connectToMetaMask", connectToMetaMask)
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {active && <div onClick={connectToMetaMask}>Disconnect</div>}
+        {!active && <div onClick={connectToMetaMask}>Connect to wallet</div>}
       </header>
     </div>
   );
